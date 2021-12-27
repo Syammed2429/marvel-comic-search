@@ -13,7 +13,7 @@ let timerId;
 
 //Song Start Playing
 let mute = () => {
-    song.src = `TheAvengers.mp3`;
+    song.src = `./TheAvengers.mp3`;
     song.autoplay = true;
     unMuteImage.style.display = 'block';
     muteImage.style.display = 'none';
@@ -21,7 +21,7 @@ let mute = () => {
 
 //Song will stop after
 let unmute = () => {
-    song.src = `TheAvengers.mp3`;
+    song.src = `./TheAvengers.mp3`;
     unMuteImage.style.display = 'none';
     muteImage.style.display = 'block';
     // console.log('Hai from unmute');

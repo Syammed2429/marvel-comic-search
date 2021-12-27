@@ -19,7 +19,7 @@ header img {
 /* Section Style Start */
 section {
   position: relative;
-  top: 15rem;
+  top: 2%;
 }
 section,
 .search {
@@ -105,25 +105,20 @@ section img {
 .personal-data {
   background: black;
   width: 800px;
-  height: 489px;
+  height: 497px;
   position: relative;
-  bottom: 28rem;
+  bottom: 44rem;
   /* left: rem; */
   margin: auto;
   display: none;
   box-shadow: 0 0 0 yellow;
   -webkit-animation: dark 2s infinite;
   animation: dark 2s infinite;
-  /* animation-name: borderLight; */
-  /* animation-duration: 3s; */
-  /* animation-iteration-count: infinite; */
-  /* animation-delay: ; */
   cursor: pointer;
 }
 @keyframes dark {
   0% {
     border: none;
-    /* border-radius: 20px; */
   }
   20% {
     border: 1px solid yellow;
@@ -152,7 +147,6 @@ section img {
   justify-content: space-evenly;
   text-align: center;
   margin-right: 3rem;
-  /* margin: 0 20px;; */
 }
 /* Go back button style start */
 .go-back-btn {
