@@ -13,7 +13,7 @@ let timerId;
 
 //Song Start Playing
 let mute = () => {
-    song.src = `starwars.mp3`;
+    song.src = `TheAvengers.mp3`;
     song.autoplay = true;
     unMuteImage.style.display = 'block';
     muteImage.style.display = 'none';
@@ -21,7 +21,7 @@ let mute = () => {
 
 //Song will stop after
 let unmute = () => {
-    song.src = `starwars.mp3`;
+    song.src = `TheAvengers.mp3`;
     unMuteImage.style.display = 'none';
     muteImage.style.display = 'block';
     // console.log('Hai from unmute');
@@ -30,12 +30,10 @@ let unmute = () => {
 
 // Fethcing the characters data from the api
 let charactersData = async (a) => {
-    let response = await fetch(`https://swapi.dev/api/people/?search=${a}`);
-    let resp = await fetch(`http://gateway.marvel.com/v1/public/characters?ts=1&name=${a}&apikey=3cd2c88f4e33cc070f216c960016e36e&hash=051bcd75702e39bd60204973db08cadf`)
-    let res = await resp.json();
-    console.log('res:', res.data.results)
+    let response = await fetch(`http://gateway.marvel.com/v1/public/characters?ts=1&name=${a}&apikey=3cd2c88f4e33cc070f216c960016e36e&hash=051bcd75702e39bd60204973db08cadf`)
     let result = await response.json();
-    return res.data.results;
+    console.log('res:', result.data.results)
+    return result.data.results;
 
 
 }
@@ -45,11 +43,9 @@ let main = async () => {
     let searchInput = document.querySelector('.search-bar').value;
     //if the innput field is empty then charactersDetails box will be hidden vice versa
     if (!searchInput) {
-        // console.log("Nulll");
         charactersDetails.style.visibility = "hidden";
 
     } else {
-        // console.log("Nooo");
         charactersDetails.style.visibility = "visible";
         charactersDetails.style.background = '#2d2f30';
 
@@ -60,14 +56,12 @@ let main = async () => {
     }
 
     appendCharacters(charactersInfo);
-    // console.log('charactersInfo:', charactersInfo)
 
 
 }
 
 //appending function
 let appendCharacters = (c) => {
-    // console.log('c:', c)
     charactersDetails.innerHTML = '';
 
     //appending the name , gender and age at the charactersDetails cont. it will show the results of the user query
@@ -93,50 +87,45 @@ let appendCharacters = (c) => {
 
             let personalInfoMessage = document.createElement('p');
             // personalInfoMessage.innerHTML = "Personal Info"
-
             let name = document.createElement('p');
+            let desc = document.createElement('p')
+
             name.innerHTML = `${data.name}`;
+            desc.innerHTML = data.description
+            desc.style.color = 'yellow';
+            desc.style.textAlign = 'center';
 
-            let birthYear = document.createElement('p');
-            birthYear.innerHTML = `Birth Year : ${data.birth_year}`;
 
-            let gender = document.createElement('p');
-            gender.innerHTML = `Gender : ${data.gender}`;
+            let comic = document.createElement('p');
+            comic.innerHTML = `Comics Available : ${data.comics.available}`;
 
-            let height = document.createElement('p');
-            height.innerHTML = `Height : ${data.height}`;
+            let story = document.createElement('p');
+            story.innerHTML = `Stories : ${data.stories.available}`;
 
             let anatomy = document.createElement('p');
-            // anatomy.innerHTML ='Anatomy';
 
-            let eyeColor = document.createElement('p');
-            eyeColor.innerHTML = `Eye Color : ${data.eye_color}`;
+            let serie = document.createElement('p');
+            serie.innerHTML = `Series : ${data.series.available}`;
 
-            let mass = document.createElement('p');
-            mass.innerHTML = `Mass : ${data.mass}`;
+            let event = document.createElement('p');
+            event.innerHTML = `Events : ${data.events.available}`;
 
-            let hairColor = document.createElement('p');
-            hairColor.innerHTML = `Hair Color : ${data.hair_color}`;
 
-            personalInfoMessage.append(birthYear, gender, height);
+            personalInfoMessage.append(comic, story);
             personalInfoMessage.classList.add('personal-Info-cont');
             personalInfo.append(personalInfoMessage)
             document.querySelector('.character-name').append(name);
+            document.querySelector('.character-desc').append(desc);
 
-            anatomy.append(eyeColor, mass, hairColor);
+            anatomy.append(serie, event);
             anatomy.classList.add('anatomy-cont');
             anatomyDetails.append(anatomy)
-            // console.log('name:', name)
-
-            // console.log('characterName:', data.birth_year )
 
         });
 
-        age.innerHTML = data.birth_year;
-        age.classList.add('age')
         characterGender.innerHTML = `id : ${data.id}`;
         characterGender.classList.add('characterGender')
-        charactersDetails.append(characterName, age, characterGender);
+        charactersDetails.append(characterName, characterGender);
     }
 
 }
